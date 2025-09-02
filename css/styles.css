@@ -174,28 +174,30 @@ body {
 
 /* MODAL */
 .modal {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(0,0,0,0.85);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 1500;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1500;
 }
 
 .modal.active {
-  display: flex;
+    display: flex;
 }
 
 .modal-content {
-  position: relative;
-  background: #fff;
-  max-width: 80%;
-  max-height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+    position: relative;
+    background: #fff;
+    max-width: 80%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .contacts__container {
@@ -224,11 +226,11 @@ body {
 }
 
 .contacts-photo img {
-  /* max-width: 720px; 
+    /* max-width: 720px; 
   max-height: 500px; */
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .contacts__text {
@@ -238,17 +240,17 @@ body {
 }
 
 .contacts__info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 50%;
-  padding: 15px 15px 15px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    padding: 15px 15px 15px 50px;
 }
 
 .contacts__socials {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .contacts__social-text {
@@ -268,10 +270,10 @@ body {
 /* SVG inherits color from parent for hover effect */
 .social-link svg,
 .header__social-link svg {
-  width: 32px;
-  height: 32px;
-  fill: currentColor;
-  transition: color 0.3s ease;
+    width: 32px;
+    height: 32px;
+    fill: currentColor;
+    transition: color 0.3s ease;
 }
 
 .contacts__social-text {
@@ -281,23 +283,23 @@ body {
 
 .social-link:hover,
 .header__social-link:hover {
-  color: #bdbcbe;
+    color: #bdbcbe;
 }
 
 .social-link:active,
 .header__social-link:active {
-  color: #333;
+    color: #333;
 }
 
 .modal-close {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  background: none;
-  border: none;
-  font-size: 28px;
-  cursor: pointer;
-  color: #333;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #333;
 }
 
 /* PORTFOLIO-PAGE */
@@ -307,43 +309,68 @@ body {
 }
 
 .portfolio-grid__container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  padding: 10px;
-  width: 100%;
-  box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 
 .portfolio-item__container-item {
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
 
 .portfolio-item {
-  background-color: #c5c5c5;
-  font-size: 24px;
-  text-align: center;
-  text-decoration: none;
-  color: #f4f4f4;
-  transition: transform 0.3s ease, 0.3s ease;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
+    background-color: #c5c5c5;
+    font-size: 24px;
+    text-align: center;
+    text-decoration: none;
+    color: #f4f4f4;
+    transition: transform 0.3s ease, 0.3s ease;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .portfolio-item:hover {
-  opacity: 0.5;
+    opacity: 0.5;
 }
-
-
 
 .portfolio-item__link img {
     object-fit: cover;
     width: 100%;
     height: 100%;
+}
+
+/* ===== Альбом: сетка фото ===== */
+.album-photos-grid {
+    padding: 0 10px 0 10px;
+    display: grid;
+    gap: 10px;
+    /* расстояние между фото */
+    grid-template-columns: repeat(3, 1fr);
+    /* базово: 3 колонки на десктопе */
+}
+
+/* карточка */
+.album-photo {
+    margin: 0;
+    aspect-ratio: 4 / 3;
+    /* одинаковая высота превью */
+    overflow: hidden;
+    /* обрезаем лишнее */
+}
+
+.album-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* вписываем фото в рамку */
+    display: block;
 }

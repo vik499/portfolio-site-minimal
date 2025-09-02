@@ -1,11 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Альбом</title>
+    <link rel="stylesheet" href="/css/normalize.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/media.css" />
+    <!-- мост к Sanity -->
+    <script defer src="/js/sanity-feed.js"></script>
 </head>
+
 <body>
-    
+    <main class="album-page">
+        <section class="album-header">
+            <div class="container">
+                <h1 id="album-title" class="portfolio-title">Загрузка…</h1>
+            </div>
+        </section>
+
+        <section class="album-gallery">
+            <div class="container">
+                <!-- сюда скрипт подставит фото -->
+                <div id="album-photos" class="album-photos-grid">
+                    <!-- скелетон можно оставить; скрипт заменит содержимое -->
+                    <p style="opacity:.7; text-align:center; padding:24px;">Загрузка фотографий…</p>
+                </div>
+            </div>
+        </section>
+    </main>
 </body>
+
 </html>

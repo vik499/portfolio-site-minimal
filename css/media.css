@@ -9,13 +9,16 @@
 }
 
 @media (max-width: 1440px) {
+    .album-photos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
     .portfolio-grid__container {
         grid-template-columns: repeat(2, 1fr);
     }
 
     .contacts__container {
-     max-height: 680px;
+        max-height: 680px;
     }
 
     .contacts-photo {
@@ -32,6 +35,9 @@
 }
 
 @media (max-width: 1024px) {
+    .album-photos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
     .header__nav {
         margin-right: 50px;
@@ -42,7 +48,7 @@
         font-size: 24px;
     }
 
-        .social-link svg,
+    .social-link svg,
     .header__social-link svg {
         width: 22px;
         height: 22px;
@@ -83,13 +89,16 @@
 
     .footer__title {
         font-size: 20px;
-           margin-bottom: 5px;
+        margin-bottom: 5px;
     }
 }
 
 @media (max-width: 768px) {
+    .album-photos-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
 
-   .nav__list {
+    .nav__list {
         gap: 10px;
     }
 
@@ -124,17 +133,21 @@
         margin-right: 8px;
     }
 
-       .portfolio-grid__container {
-    /* display: grid; */
-    grid-template-columns: repeat(1, 1fr);
-    /* gap: 10px;
+    .portfolio-grid__container {
+        /* display: grid; */
+        grid-template-columns: repeat(1, 1fr);
+        /* gap: 10px;
     padding: 5px; */
 
-}
+    }
 
 }
 
 @media (max-width: 690px) {
+    .album-photos-grid {
+        grid-template-columns: 1fr;
+    }
+
     .header__title {
         margin-right: 25px;
     }
@@ -195,6 +208,10 @@
 }
 
 @media (max-width: 459px) {
+    .album-photos-grid {
+        grid-template-columns: 1fr;
+    }
+
     .contacts__socials {
         align-items: flex-start;
     }
@@ -203,15 +220,15 @@
         padding-left: 0;
     }
 
-        .contacts__info-top {
+    .contacts__info-top {
         display: flex;
         flex-direction: column;
         align-items: end;
     }
 
-        .contacts__text {
+    .contacts__text {
         text-align: end;
-}
+    }
 
     .contacts__socials {
         align-items: flex-start;
