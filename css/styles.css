@@ -20,27 +20,27 @@ h6 {
 
 @font-face {
     font-family: 'Roboto-Regular';
-    src: url(/fonts/Roboto-Regular.woff2);
+    src: url(../fonts/Roboto-Regular.woff2);
 }
 
 @font-face {
     font-family: 'Roboto-ExtraLight';
-    src: url(/fonts/Roboto-ExtraLight.woff2);
+    src: url(../fonts/Roboto-ExtraLight.woff2);
 }
 
 @font-face {
     font-family: 'Roboto-Bold';
-    src: url(/fonts/Roboto-Bold.woff2);
+    src: url(../fonts/Roboto-Bold.woff2);
 }
 
 @font-face {
     font-family: 'Open Sans-Regular';
-    src: url(/fonts/OpenSans-Regular.woff2);
+    src: url(../fonts/OpenSans-Regular.woff2);
 }
 
 @font-face {
     font-family: 'Open Sans-Light';
-    src: url(/fonts/OpenSans-Light.woff2);
+    src: url(../fonts/OpenSans-Light.woff2);
 }
 
 body {
