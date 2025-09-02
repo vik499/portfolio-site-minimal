@@ -185,12 +185,33 @@ async function initAlbumPage() {
   const grid = document.querySelector("#album-photos");
   if (!grid) return;
 
+  const titleEl = document.getElementById("album-title");
   const params = new URLSearchParams(location.search);
   const slug = params.get("slug");
+
+function showLoader() {
+  if (document.querySelector('.loader-overlay')) return; // не дублируем
+  const overlay = document.createElement('div');
+  overlay.className = 'loader-overlay';
+  overlay.innerHTML = `
+    <div class="loader" role="status" aria-live="polite" aria-label="Загрузка">
+      <span class="loader__circle"></span>
+    </div>`;
+  document.body.appendChild(overlay);
+}
+
+function hideLoader() {
+  const overlay = document.querySelector('.loader-overlay');
+  if (overlay) overlay.remove();
+}
+
   if (!slug) {
     grid.innerHTML = "<p>Не указан slug альбома (?slug=...)</p>";
     return;
   }
+
+  // ⬇️ показываем спиннер до fetch
+  showLoader();
 
   const GROQ = `*[_type=="album" && slug.current==$slug][0]{
     title,
@@ -201,27 +222,28 @@ async function initAlbumPage() {
   }`;
 
   try {
-    // Param interpolation via string replace (since using HTTP GET without variables)
     const safeSlug = slug.replace(/'/g, "\\'");
     const query = GROQ.replace("$slug", `'${safeSlug}'`);
     const album = await fetchGroq(query);
-    const titleEl = document.getElementById("album-title");
+
+    // ⬇️ убираем спиннер, готовим сетку
+    hideLoader();
 
     if (album?.title) {
       if (titleEl) titleEl.textContent = album.title;
       document.title = album.title;
     }
+
     if (!album?.gallery?.length) {
-      grid.innerHTML = "<p>В этом альбоме пока нет фото.</p>";
+      grid.innerHTML = "<p style='opacity:.7;text-align:center;padding:24px'>В этом альбоме пока нет фото.</p>";
       return;
     }
 
-    grid.innerHTML = "";
+    // отрисовка картинок
     for (const ph of album.gallery) {
-const src    = withParams(ph.src, { w: 1600 });
-const srcset = buildSrcset(ph.src, [800, 1200, 1600, 2000, 2400, 3000]);
-const sizes  = "(max-width: 768px) 100vw, 1200px";
-
+      const src    = withParams(ph.src, { w: 1200, auto: "format" });
+      const srcset = buildSrcset(ph.src, [800, 1600, 2400]);
+      const sizes  = "(max-width: 768px) 100vw, 1200px";
 
       const item = el(`
         <figure class="album-photo">
@@ -238,9 +260,12 @@ const sizes  = "(max-width: 768px) 100vw, 1200px";
     }
   } catch (e) {
     console.error("Album init failed:", e);
-    grid.innerHTML = "<p>Ошибка загрузки альбома.</p>";
+    // ⬇️ на ошибке тоже убираем «вечную» загрузку и показываем сообщение
+    hideLoader();
+    grid.innerHTML = "<p style='color:#c33;text-align:center;padding:24px'>Ошибка загрузки альбома. Попробуйте обновить страницу.</p>";
   }
 }
+
 
 /* ================
    MODAL: from Sanity
