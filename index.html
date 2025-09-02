@@ -1,163 +1,302 @@
 <!DOCTYPE html>
 <html lang="ru">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>web-site Natalia Mazina</title>
-    <link rel="stylesheet" href="/css/normalize.css">
-    <link rel="stylesheet" href="css/swiper-bundle.min.css">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/media.css">
-    <script defer src="js/swiper-bundle.min.js"></script>
-    <script defer src="js/sanity-feed.js"></script>
-    <script defer src="/js/script.js"></script>
-    <script defer src="/js/contacts-modal.js"></script>
-</head>
 
-<body>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/media.css" />
+
+    <!-- JS -->
+    <script src="js/swiper-bundle.min.js" defer></script>
+    <script src="js/sanity-feed.js" defer></script>
+    <script src="js/script.js" defer></script>
+    <script src="js/contacts-modal.js" defer></script>
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <header class="header header__container">
+      <div class="header__logo">
+        <h1 class="header__title">Natalia Mazina</h1>
+      </div>
+
+      <div class="header__block-right">
+        <nav class="nav header__nav" aria-label="Главная навигация">
+          <ul class="list-reset nav__list">
+            <li class="nav__item">
+              <a class="nav__link" href="portfolio.html">Portfolio</a>
+            </li>
+            <li class="nav__item">
+              <!-- кнопка вместо ссылки, для открытия окна contacts -->
+              <button
+                id="openContactsBtn"
+                class="btn-reset nav__link nav__btn"
+                type="button"
+                aria-haspopup="dialog"
+                aria-controls="contactsModal"
+              >
+                Contact's
+              </button>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="header__socials">
+          <ul class="list-reset header__social-list">
+            <li class="header__social-item">
+              <a href="#" class="header__social-link" aria-label="VK">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    d="M23.405 16.865a11.4 11.4 0 0 0-2.123-2.964a16 16 0 0 0-.905-.94l-.038-.037a19 19 0 0 1-.346-.344a29.7 29.7 0 0 0 3.01-5.238l.033-.074l.023-.078c.109-.363.233-1.053-.207-1.677c-.456-.644-1.185-.76-1.674-.76h-2.247a2.23 2.23 0 0 0-2.19 1.442a17.5 17.5 0 0 1-1.806 3.271V6.833c0-.34-.032-.91-.397-1.39c-.436-.576-1.067-.69-1.505-.69H9.467a1.813 1.813 0 0 0-1.85 1.682l-.003.045v.045c0 .485.192.843.346 1.068c.069.101.142.193.189.251l.01.013c.05.062.083.103.116.149c.088.118.213.302.249.776v1.473a19.8 19.8 0 0 1-1.751-3.792l-.008-.022l-.008-.021c-.122-.319-.317-.783-.708-1.137c-.456-.415-.996-.53-1.487-.53h-2.28c-.497 0-1.096.116-1.543.587C.3 5.804.25 6.36.25 6.654v.134l.028.13a19.4 19.4 0 0 0 3.801 8.02a10.15 10.15 0 0 0 7.893 4.692l.041.003h.042c.726 0 1.483-.063 2.052-.442c.767-.512.828-1.297.828-1.689v-1.138c.197.16.441.374.74.662c.362.362.65.676.897.95l.132.146c.192.214.381.425.553.598c.216.217.483.456.817.633c.363.191.744.278 1.148.278h2.281c.481 0 1.17-.114 1.655-.676c.528-.612.488-1.363.322-1.902l-.03-.097zm-5.72.106a26 26 0 0 0-.957-1.014l-.003-.003c-1.357-1.308-1.99-1.535-2.438-1.535c-.239 0-.502.026-.673.24a.8.8 0 0 0-.147.348a2.5 2.5 0 0 0-.032.444v2.051c0 .255-.042.362-.16.44c-.157.105-.492.19-1.211.19a8.65 8.65 0 0 1-6.752-4.052l-.008-.013l-.01-.012A17.9 17.9 0 0 1 1.75 6.63c.004-.13.032-.209.078-.257c.047-.05.162-.12.454-.12h2.28c.253 0 .385.056.48.141c.106.098.2.263.312.557c.56 1.646 1.316 3.186 2.033 4.318c.358.565.71 1.036 1.028 1.369c.159.166.314.304.463.402c.143.094.306.169.474.169c.088 0 .191-.01.29-.053a.52.52 0 0 0 .25-.232c.103-.188.132-.465.132-.828V8.723c-.053-.818-.3-1.279-.54-1.606a6 6 0 0 0-.15-.193l-.013-.016a3 3 0 0 1-.122-.16a.4.4 0 0 1-.085-.214a.313.313 0 0 1 .324-.282h3.595c.206 0 .275.05.31.097c.05.065.092.2.092.484v4.528c0 .538.248.902.608.902c.414 0 .713-.251 1.235-.773l.009-.01l.008-.009a19 19 0 0 0 2.84-4.722l.004-.012a.73.73 0 0 1 .74-.485h2.3c.312 0 .414.08.448.127c.035.05.06.157 0 .367a28.2 28.2 0 0 1-3.029 5.2l-.008.012c-.115.177-.242.373-.26.597c-.02.242.084.461.267.697c.133.196.408.465.687.738l.026.026c.292.286.609.596.863.896l.007.007l.007.008a9.9 9.9 0 0 1 1.865 2.586c.076.26.03.394-.03.463c-.069.08-.224.155-.518.155h-2.282a.9.9 0 0 1-.447-.105a2 2 0 0 1-.454-.364c-.143-.143-.298-.316-.488-.527z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </a>
+            </li>
+
+            <li class="header__social-item">
+              <a href="#" class="header__social-link" aria-label="Instagram">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <g fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 16a4 4 0 1 0 0-8a4 4 0 0 0 0 8"
+                    />
+                    <path
+                      d="M3 16V8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5Z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="m17.5 6.51l.01-.011"
+                    />
+                  </g>
+                </svg>
+              </a>
+            </li>
+
+            <li class="header__social-item">
+              <a href="#" class="header__social-link" aria-label="Telegram">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    d="M5.788 14.02a1 1 0 0 0 .132.031a456 456 0 0 1 .844 2.002c.503 1.202 1.01 2.44 1.121 2.796c.139.438.285.736.445.94c.083.104.178.196.29.266a1 1 0 0 0 .186.088c.32.12.612.07.795.009a1.3 1.3 0 0 0 .304-.15L9.91 20l2.826-1.762l3.265 2.502q.072.055.156.093c.392.17.772.23 1.13.182c.356-.05.639-.199.85-.368a2 2 0 0 0 .564-.728l.009-.022l.003-.008l.002-.004v-.002l.001-.001a1 1 0 0 0 .04-.133l2.98-15.025a1 1 0 0 0 .014-.146c0-.44-.166-.859-.555-1.112c-.334-.217-.705-.227-.94-.209c-.252.02-.486.082-.643.132a4 4 0 0 0-.26.094l-.011.005l-16.714 6.556l-.002.001a2 2 0 0 0-.167.069a2.5 2.5 0 0 0-.38.212c-.227.155-.75.581-.661 1.285c.07.56.454.905.689 1.071c.128.091.25.156.34.199c.04.02.126.054.163.07l.01.003zm14.138-9.152h-.002l-.026.011l-16.734 6.565l-.026.01l-.01.003a1 1 0 0 0-.09.04a1 1 0 0 0 .086.043l3.142 1.058a1 1 0 0 1 .16.076l10.377-6.075l.01-.005a2 2 0 0 1 .124-.068c.072-.037.187-.091.317-.131c.09-.028.357-.107.645-.014a.85.85 0 0 1 .588.689a.84.84 0 0 1 .003.424c-.07.275-.262.489-.437.653c-.15.14-2.096 2.016-4.015 3.868l-2.613 2.52l-.465.45l5.872 4.502a.54.54 0 0 0 .251.04a.23.23 0 0 0 .117-.052a.5.5 0 0 0 .103-.12l.002-.001l2.89-14.573a2 2 0 0 0-.267.086zm-8.461 12.394l-1.172-.898l-.284 1.805zm-2.247-2.68l1.165-1.125l2.613-2.522l.973-.938l-6.52 3.817l.035.082a339 339 0 0 1 1.22 2.92l.283-1.8a.75.75 0 0 1 .231-.435"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN -->
     <main>
-        <!-- HEADER -->
-        <header class="header header__container">
-            <div class="header__logo">
-                <h1 class="header__title">Natalia Mazina</h1>
+      <!-- HERO -->
+      <section id="hero" aria-label="Галерея">
+        <div class="hero__container">
+          <div class="swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <img src="img/img-1.jpg" alt="Слайд 1" />
+              </div>
+              <div class="swiper-slide">
+                <img src="img/img-2.jpg" alt="Слайд 2" />
+              </div>
+              <div class="swiper-slide">
+                <img src="img/img-3.jpg" alt="Слайд 3" />
+              </div>
             </div>
-            <div class="header__block-right">
-                <nav class="nav header__nav">
-                    <ul class="list-reset nav__list">
-                        <li class="nav__item"><a class="nav__link" href="portfolio.html">Portfolio</a></li>
-                        <li class="nav__item">
-                            <!-- кнопка вместо ссылки, для открытия окна contacts -->
-                            <button id="openContactsBtn" class="btn-reset nav__link nav__btn">
-                                Contact's
-                            </button>
-                        </li>
+          </div>
+        </div>
+      </section>
+    </main>
 
-                    </ul>
-                </nav>
-                <div class="header__socials">
-                    <ul class="list-reset header__social-list">
-                        </li>
-                        <li class="header__social-item">
-                            <a href="#" class="header__social-link" aria-label="VK">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                    <path fill="currentColor" fill-rule="evenodd"
-                                        d="M23.405 16.865a11.4 11.4 0 0 0-2.123-2.964a16 16 0 0 0-.905-.94l-.038-.037a19 19 0 0 1-.346-.344a29.7 29.7 0 0 0 3.01-5.238l.033-.074l.023-.078c.109-.363.233-1.053-.207-1.677c-.456-.644-1.185-.76-1.674-.76h-2.247a2.23 2.23 0 0 0-2.19 1.442a17.5 17.5 0 0 1-1.806 3.271V6.833c0-.34-.032-.91-.397-1.39c-.436-.576-1.067-.69-1.505-.69H9.467a1.813 1.813 0 0 0-1.85 1.682l-.003.045v.045c0 .485.192.843.346 1.068c.069.101.142.193.189.251l.01.013c.05.062.083.103.116.149c.088.118.213.302.249.776v1.473a19.8 19.8 0 0 1-1.751-3.792l-.008-.022l-.008-.021c-.122-.319-.317-.783-.708-1.137c-.456-.415-.996-.53-1.487-.53h-2.28c-.497 0-1.096.116-1.543.587C.3 5.804.25 6.36.25 6.654v.134l.028.13a19.4 19.4 0 0 0 3.801 8.02a10.15 10.15 0 0 0 7.893 4.692l.041.003h.042c.726 0 1.483-.063 2.052-.442c.767-.512.828-1.297.828-1.689v-1.138c.197.16.441.374.74.662c.362.362.65.676.897.95l.132.146c.192.214.381.425.553.598c.216.217.483.456.817.633c.363.191.744.278 1.148.278h2.281c.481 0 1.17-.114 1.655-.676c.528-.612.488-1.363.322-1.902l-.03-.097zm-5.72.106a26 26 0 0 0-.957-1.014l-.003-.003c-1.357-1.308-1.99-1.535-2.438-1.535c-.239 0-.502.026-.673.24a.8.8 0 0 0-.147.348a2.5 2.5 0 0 0-.032.444v2.051c0 .255-.042.362-.16.44c-.157.105-.492.19-1.211.19a8.65 8.65 0 0 1-6.752-4.052l-.008-.013l-.01-.012A17.9 17.9 0 0 1 1.75 6.63c.004-.13.032-.209.078-.257c.047-.05.162-.12.454-.12h2.28c.253 0 .385.056.48.141c.106.098.2.263.312.557c.56 1.646 1.316 3.186 2.033 4.318c.358.565.71 1.036 1.028 1.369c.159.166.314.304.463.402c.143.094.306.169.474.169c.088 0 .191-.01.29-.053a.52.52 0 0 0 .25-.232c.103-.188.132-.465.132-.828V8.723c-.053-.818-.3-1.279-.54-1.606a6 6 0 0 0-.15-.193l-.013-.016a3 3 0 0 1-.122-.16a.4.4 0 0 1-.085-.214a.313.313 0 0 1 .324-.282h3.595c.206 0 .275.05.31.097c.05.065.092.2.092.484v4.528c0 .538.248.902.608.902c.414 0 .713-.251 1.235-.773l.009-.01l.008-.009a19 19 0 0 0 2.84-4.722l.004-.012a.73.73 0 0 1 .74-.485h2.3c.312 0 .414.08.448.127c.035.05.06.157 0 .367a28.2 28.2 0 0 1-3.029 5.2l-.008.012c-.115.177-.242.373-.26.597c-.02.242.084.461.267.697c.133.196.408.465.687.738l.026.026c.292.286.609.596.863.896l.007.007l.007.008a9.9 9.9 0 0 1 1.865 2.586c.076.26.03.394-.03.463c-.069.08-.224.155-.518.155h-2.282a.9.9 0 0 1-.447-.105a2 2 0 0 1-.454-.364c-.143-.143-.298-.316-.488-.527z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </a>
-                        </li>
-                        <li class="header__social-item">
-                            <a href="#" class="header__social-link" aria-label="Instagram">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                    <g fill="none" stroke="currentColor" stroke-width="1.5">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M12 16a4 4 0 1 0 0-8a4 4 0 0 0 0 8" />
-                                        <path
-                                            d="M3 16V8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5Z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="m17.5 6.51l.01-.011" />
-                                    </g>
-                                </svg>
-                            </a>
-                        </li>
-                        <li class="header__social-item">
-                            <a href="#" class="header__social-link" aria-label="Telegram">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                    <path fill="currentColor" fill-rule="evenodd"
-                                        d="M5.788 14.02a1 1 0 0 0 .132.031a456 456 0 0 1 .844 2.002c.503 1.202 1.01 2.44 1.121 2.796c.139.438.285.736.445.94c.083.104.178.196.29.266a1 1 0 0 0 .186.088c.32.12.612.07.795.009a1.3 1.3 0 0 0 .304-.15L9.91 20l2.826-1.762l3.265 2.502q.072.055.156.093c.392.17.772.23 1.13.182c.356-.05.639-.199.85-.368a2 2 0 0 0 .564-.728l.009-.022l.003-.008l.002-.004v-.002l.001-.001a1 1 0 0 0 .04-.133l2.98-15.025a1 1 0 0 0 .014-.146c0-.44-.166-.859-.555-1.112c-.334-.217-.705-.227-.94-.209c-.252.02-.486.082-.643.132a4 4 0 0 0-.26.094l-.011.005l-16.714 6.556l-.002.001a2 2 0 0 0-.167.069a2.5 2.5 0 0 0-.38.212c-.227.155-.75.581-.661 1.285c.07.56.454.905.689 1.071c.128.091.25.156.34.199c.04.02.126.054.163.07l.01.003zm14.138-9.152h-.002l-.026.011l-16.734 6.565l-.026.01l-.01.003a1 1 0 0 0-.09.04a1 1 0 0 0 .086.043l3.142 1.058a1 1 0 0 1 .16.076l10.377-6.075l.01-.005a2 2 0 0 1 .124-.068c.072-.037.187-.091.317-.131c.09-.028.357-.107.645-.014a.85.85 0 0 1 .588.689a.84.84 0 0 1 .003.424c-.07.275-.262.489-.437.653c-.15.14-2.096 2.016-4.015 3.868l-2.613 2.52l-.465.45l5.872 4.502a.54.54 0 0 0 .251.04a.23.23 0 0 0 .117-.052a.5.5 0 0 0 .103-.12l.002-.001l2.89-14.573a2 2 0 0 0-.267.086zm-8.461 12.394l-1.172-.898l-.284 1.805zm-2.247-2.68l1.165-1.125l2.613-2.522l.973-.938l-6.52 3.817l.035.082a339 339 0 0 1 1.22 2.92l.283-1.8a.75.75 0 0 1 .231-.435"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </header>
-        <!-- HERO -->
-        <section id="hero">
-            <div class="hero__container">
-                <div class="swiper">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide"><img src="/img/img-1.jpg" alt="Slide 1"></div>
-                        <div class="swiper-slide"><img src="/img/img-2.jpg" alt="Slide 2"></div>
-                        <div class="swiper-slide"><img src="/img/img-3.jpg" alt="Slide 3"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- FOOTER -->
-        <footer class="footer">
-            <div class="footer__container">
-                <div class="footer__logo">
-                    <span class="footer__pretitle">Photographer</span>
-                    <h2 class="footer__title">Natalia Mazina</h2>
-                </div>
-                <div class="footer__block-bot">
-                    <span class="footer__text footer__text--top">2007-2025 Natalia Mazina©. Все права защищены.</span>
-                    <span class="footer__text footer__text--bot">Meta* (продукты Facebook* и Instagram*) признана
-                        экстремистской
-                        организацией на территории Российской Федерации.</span>
-                </div>
-        </footer>
-        <!-- MODAL -->
-        <div id="contactsModal" class="modal">
-            <div class="modal-content">
-                <button class="modal-close" id="closeContactsBtn">&times;</button>
-                 <!-- <h1 class="contacts__title">Contact's</h1> -->
-                <div class="contacts__container">
-                    <div class="contacts-photo">
-                        <img src="/img/img-contacts.jpg" alt="Фотограф Natalia Mazina" />
-                    </div>
-                                        <div class="contacts-photo__mobile">
-                        <img src="/img/img-contacts__mobile.jpg" alt="Фотограф Natalia Mazina" />
-                    </div>
-                    <div class="contacts__info">
-                        <div class="contacts__info-top">
-                        <span class="contacts__pretitle">Photographer</span>
-                        <h2 class="contacts__subtitle">Natalia Mazina</h2>
-                        <p class="contacts__text"> &laquo;Как профессиональный фотограф, я&nbsp;стремлюсь запечатлеть
-                            суть и&nbsp;красоту окружающего мира через объектив своей камеры.
-                            Благодаря пристальному вниманию к&nbsp;деталям я&nbsp;создаю
-                            потрясающие снимки, раскрывающие уникальные истории и&nbsp;личности
-                            моих клиентов&raquo;.</p>
-                            </div>
-                            <!-- <div class="contacts__info-bot"> -->
-                        <div class="contacts__socials">
-                            <a href="#" aria-label="VK" class="social-link">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="social__link-svg">
-                                    <path fill="currentColor" fill-rule="evenodd"
-                                        d="M23.405 16.865a11.4 11.4 0 0 0-2.123-2.964a16 16 0 0 0-.905-.94l-.038-.037a19 19 0 0 1-.346-.344a29.7 29.7 0 0 0 3.01-5.238l.033-.074l.023-.078c.109-.363.233-1.053-.207-1.677c-.456-.644-1.185-.76-1.674-.76h-2.247a2.23 2.23 0 0 0-2.19 1.442a17.5 17.5 0 0 1-1.806 3.271V6.833c0-.34-.032-.91-.397-1.39c-.436-.576-1.067-.69-1.505-.69H9.467a1.813 1.813 0 0 0-1.85 1.682l-.003.045v.045c0 .485.192.843.346 1.068c.069.101.142.193.189.251l.01.013c.05.062.083.103.116.149c.088.118.213.302.249.776v1.473a19.8 19.8 0 0 1-1.751-3.792l-.008-.022l-.008-.021c-.122-.319-.317-.783-.708-1.137c-.456-.415-.996-.53-1.487-.53h-2.28c-.497 0-1.096.116-1.543.587C.3 5.804.25 6.36.25 6.654v.134l.028.13a19.4 19.4 0 0 0 3.801 8.02a10.15 10.15 0 0 0 7.893 4.692l.041.003h.042c.726 0 1.483-.063 2.052-.442c.767-.512.828-1.297.828-1.689v-1.138c.197.16.441.374.74.662c.362.362.65.676.897.95l.132.146c.192.214.381.425.553.598c.216.217.483.456.817.633c.363.191.744.278 1.148.278h2.281c.481 0 1.17-.114 1.655-.676c.528-.612.488-1.363.322-1.902l-.03-.097zm-5.72.106a26 26 0 0 0-.957-1.014l-.003-.003c-1.357-1.308-1.99-1.535-2.438-1.535c-.239 0-.502.026-.673.24a.8.8 0 0 0-.147.348a2.5 2.5 0 0 0-.032.444v2.051c0 .255-.042.362-.16.44c-.157.105-.492.19-1.211.19a8.65 8.65 0 0 1-6.752-4.052l-.008-.013l-.01-.012A17.9 17.9 0 0 1 1.75 6.63c.004-.13.032-.209.078-.257c.047-.05.162-.12.454-.12h2.28c.253 0 .385.056.48.141c.106.098.2.263.312.557c.56 1.646 1.316 3.186 2.033 4.318c.358.565.71 1.036 1.028 1.369c.159.166.314.304.463.402c.143.094.306.169.474.169c.088 0 .191-.01.29-.053a.52.52 0 0 0 .25-.232c.103-.188.132-.465.132-.828V8.723c-.053-.818-.3-1.279-.54-1.606a6 6 0 0 0-.15-.193l-.013-.016a3 3 0 0 1-.122-.16a.4.4 0 0 1-.085-.214a.313.313 0 0 1 .324-.282h3.595c.206 0 .275.05.31.097c.05.065.092.2.092.484v4.528c0 .538.248.902.608.902c.414 0 .713-.251 1.235-.773l.009-.01l.008-.009a19 19 0 0 0 2.84-4.722l.004-.012a.73.73 0 0 1 .74-.485h2.3c.312 0 .414.08.448.127c.035.05.06.157 0 .367a28.2 28.2 0 0 1-3.029 5.2l-.008.012c-.115.177-.242.373-.26.597c-.02.242.084.461.267.697c.133.196.408.465.687.738l.026.026c.292.286.609.596.863.896l.007.007l.007.008a9.9 9.9 0 0 1 1.865 2.586c.076.26.03.394-.03.463c-.069.08-.224.155-.518.155h-2.282a.9.9 0 0 1-.447-.105a2 2 0 0 1-.454-.364c-.143-.143-.298-.316-.488-.527z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="contacts__social-text">VK:&nbsp;@Natalia&nbsp;Mazina</span>
-                            </a>
-                            <a href="#" aria-label="Instagram" class="social-link social-link--instagram">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="social__link-svg">
-                                    <g fill="none" stroke="currentColor" stroke-width="1.5">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M12 16a4 4 0 1 0 0-8a4 4 0 0 0 0 8" />
-                                        <path
-                                            d="M3 16V8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5Z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="m17.5 6.51l.01-.011" />
-                                    </g>
-                                </svg>
-                                <span class="contacts__social-text">INSTAGRAM:&nbsp;@Natalia&nbsp;Mazina</span>
-                            </a>
-                            <a href="#" aria-label="Telegram" class="social-link">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="social__link-svg">
-                                    <path fill="currentColor" fill-rule="evenodd"
-                                        d="M5.788 14.02a1 1 0 0 0 .132.031a456 456 0 0 1 .844 2.002c.503 1.202 1.01 2.44 1.121 2.796c.139.438.285.736.445.94c.083.104.178.196.29.266a1 1 0 0 0 .186.088c.32.12.612.07.795.009a1.3 1.3 0 0 0 .304-.15L9.91 20l2.826-1.762l3.265 2.502q.072.055.156.093c.392.17.772.23 1.13.182c.356-.05.639-.199.85-.368a2 2 0 0 0 .564-.728l.009-.022l.003-.008l.002-.004v-.002l.001-.001a1 1 0 0 0 .04-.133l2.98-15.025a1 1 0 0 0 .014-.146c0-.44-.166-.859-.555-1.112c-.334-.217-.705-.227-.94-.209c-.252.02-.486.082-.643.132a4 4 0 0 0-.26.094l-.011.005l-16.714 6.556l-.002.001a2 2 0 0 0-.167.069a2.5 2.5 0 0 0-.38.212c-.227.155-.75.581-.661 1.285c.07.56.454.905.689 1.071c.128.091.25.156.34.199c.04.02.126.054.163.07l.01.003zm14.138-9.152h-.002l-.026.011l-16.734 6.565l-.026.01l-.01.003a1 1 0 0 0-.09.04a1 1 0 0 0 .086.043l3.142 1.058a1 1 0 0 1 .16.076l10.377-6.075l.01-.005a2 2 0 0 1 .124-.068c.072-.037.187-.091.317-.131c.09-.028.357-.107.645-.014a.85.85 0 0 1 .588.689a.84.84 0 0 1 .003.424c-.07.275-.262.489-.437.653c-.15.14-2.096 2.016-4.015 3.868l-2.613 2.52l-.465.45l5.872 4.502a.54.54 0 0 0 .251.04a.23.23 0 0 0 .117-.052a.5.5 0 0 0 .103-.12l.002-.001l2.89-14.573a2 2 0 0 0-.267.086zm-8.461 12.394l-1.172-.898l-.284 1.805zm-2.247-2.68l1.165-1.125l2.613-2.522l.973-.938l-6.52 3.817l.035.082a339 339 0 0 1 1.22 2.92l.283-1.8a.75.75 0 0 1 .231-.435"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="contacts__social-text">TG:&nbsp;@Natalia&nbsp;Mazina</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer__container">
+        <div class="footer__logo">
+          <span class="footer__pretitle">Photographer</span>
+          <h2 class="footer__title">Natalia Mazina</h2>
         </div>
 
-    </main>
-</body>
+        <div class="footer__block-bot">
+          <span class="footer__text footer__text--top">
+            2007-2025 Natalia Mazina©. Все права защищены.
+          </span>
+          <span class="footer__text footer__text--bot">
+            Meta* (продукты Facebook* и Instagram*) признана экстремистской
+            организацией на территории Российской Федерации.
+          </span>
+        </div>
+      </div>
+    </footer>
 
+    <!-- MODAL -->
+    <div
+      id="contactsModal"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="contactsTitle"
+      aria-hidden="true"
+      hidden
+    >
+      <div class="modal-content">
+        <button
+          class="modal-close"
+          id="closeContactsBtn"
+          type="button"
+          aria-label="Закрыть модальное окно"
+        >
+          &times;
+        </button>
+
+        <div class="contacts__container">
+          <div class="contacts-photo">
+            <img
+              data-sanity-modal-img="desktop"
+              src="img/img-contacts.jpg"
+              alt="Контактное фото (desktop)"
+            />
+          </div>
+
+          <div class="contacts-photo__mobile">
+            <img
+              data-sanity-modal-img="mobile"
+              src="img/img-contacts__mobile.jpg"
+              alt="Контактное фото (mobile)"
+            />
+          </div>
+
+          <div class="contacts__info">
+            <div class="contacts__info-top">
+              <span class="contacts__pretitle">Photographer</span>
+              <h2 class="contacts__subtitle" id="contactsTitle">
+                Natalia Mazina
+              </h2>
+              <p class="contacts__text">
+                &laquo;Как профессиональный фотограф, я&nbsp;стремлюсь
+                запечатлеть суть и&nbsp;красоту окружающего мира через объектив
+                своей камеры. Благодаря пристальному вниманию к&nbsp;деталям
+                я&nbsp;создаю потрясающие снимки, раскрывающие уникальные
+                истории и&nbsp;личности моих клиентов&raquo;.
+              </p>
+            </div>
+
+            <div class="contacts__socials">
+              <a href="#" aria-label="VK" class="social-link">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  class="social__link-svg"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    d="M23.405 16.865a11.4 11.4 0 0 0-2.123-2.964a16 16 0 0 0-.905-.94l-.038-.037a19 19 0 0 1-.346-.344a29.7 29.7 0 0 0 3.01-5.238l.033-.074l.023-.078c.109-.363.233-1.053-.207-1.677c-.456-.644-1.185-.76-1.674-.76h-2.247a2.23 2.23 0 0 0-2.19 1.442a17.5 17.5 0 0 1-1.806 3.271V6.833c0-.34-.032-.91-.397-1.39c-.436-.576-1.067-.69-1.505-.69H9.467a1.813 1.813 0 0 0-1.85 1.682l-.003.045v.045c0 .485.192.843.346 1.068c.069.101.142.193.189.251l.01.013c.05.062.083.103.116.149c.088.118.213.302.249.776v1.473a19.8 19.8 0 0 1-1.751-3.792l-.008-.022l-.008-.021c-.122-.319-.317-.783-.708-1.137c-.456-.415-.996-.53-1.487-.53h-2.28c-.497 0-1.096.116-1.543.587C.3 5.804.25 6.36.25 6.654v.134l.028.13a19.4 19.4 0 0 0 3.801 8.02a10.15 10.15 0 0 0 7.893 4.692l.041.003h.042c.726 0 1.483-.063 2.052-.442c.767-.512.828-1.297.828-1.689v-1.138c.197.16.441.374.74.662c.362.362.65.676.897.95l.132.146c.192.214.381.425.553.598c.216.217.483.456.817.633c.363.191.744.278 1.148.278h2.281c.481 0 1.17-.114 1.655-.676c.528-.612.488-1.363.322-1.902l-.03-.097zm-5.72.106a26 26 0 0 0-.957-1.014l-.003-.003c-1.357-1.308-1.99-1.535-2.438-1.535c-.239 0-.502.026-.673.24a.8.8 0 0 0-.147.348a2.5 2.5 0 0 0-.032.444v2.051c0 .255-.042.362-.16.44c-.157.105-.492.19-1.211.19a8.65 8.65 0 0 1-6.752-4.052l-.008-.013l-.01-.012A17.9 17.9 0 0 1 1.75 6.63c.004-.13.032-.209.078-.257c.047-.05.162-.12.454-.12h2.28c.253 0 .385.056.48.141c.106.098.2.263.312.557c.56 1.646 1.316 3.186 2.033 4.318c.358.565.71 1.036 1.028 1.369c.159.166.314.304.463.402c.143.094.306.169.474.169c.088 0 .191-.01.29-.053a.52.52 0 0 0 .25-.232c.103-.188.132-.465.132-.828V8.723c-.053-.818-.3-1.279-.54-1.606a6 6 0 0 0-.15-.193l-.013-.016a3 3 0 0 1-.122-.16a.4.4 0 0 1-.085-.214a.313.313 0 0 1 .324-.282h3.595c.206 0 .275.05.31.097c.05.065.092.2.092.484v4.528c0 .538.248.902.608.902c.414 0 .713-.251 1.235-.773l.009-.01l.008-.009a19 19 0 0 0 2.84-4.722l.004-.012a.73.73 0 0 1 .74-.485h2.3c.312 0 .414.08.448.127c.035.05.06.157 0 .367a28.2 28.2 0 0 1-3.029 5.2l-.008.012c-.115.177-.242.373-.26.597c-.02.242.084.461.267.697c.133.196.408.465.687.738l.026.026c.292.286.609.596.863.896l.007.007l.007.008a9.9 9.9 0 0 1 1.865 2.586c.076.26.03.394-.03.463c-.069.08-.224.155-.518.155H8.23a.9.9 0 0 1-.447-.105a2 2 0 0 1-.454-.364c-.143-.143-.298-.316-.488-.527z"
+                  />
+                </svg>
+                <span class="contacts__social-text"
+                  >VK:&nbsp;@Natalia&nbsp;Mazina</span
+                >
+              </a>
+
+              <a
+                href="#"
+                aria-label="Instagram"
+                class="social-link social-link--instagram"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  class="social__link-svg"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <g fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 16a4 4 0 1 0 0-8a4 4 0 0 0 0 8"
+                    />
+                    <path
+                      d="M3 16V8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5Z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="m17.5 6.51l.01-.011"
+                    />
+                  </g>
+                </svg>
+                <span class="contacts__social-text"
+                  >INSTAGRAM:&nbsp;@Natalia&nbsp;Mazina</span
+                >
+              </a>
+
+              <a href="#" aria-label="Telegram" class="social-link">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  class="social__link-svg"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    d="M5.788 14.02a1 1 0 0 0 .132.031a456 456 0 0 1 .844 2.002c.503 1.202 1.01 2.44 1.121 2.796c.139.438.285.736.445.94c.083.104.178.196.29.266a1 1 0 0 0 .186.088c.32.12.612.07.795.009a1.3 1.3 0 0 0 .304-.15L9.91 20l2.826-1.762l3.265 2.502q.072.055.156.093c.392.17.772.23 1.13.182c.356-.05.639-.199.85-.368a2 2 0 0 0 .564-.728l.009-.022l.003-.008l.002-.004v-.002l.001-.001a1 1 0 0 0 .04-.133l2.98-15.025a1 1 0 0 0 .014-.146c0-.44-.166-.859-.555-1.112c-.334-.217-.705-.227-.94-.209c-.252.02-.486.082-.643.132a4 4 0 0 0-.26.094l-.011.005l-16.714 6.556l-.002.001a2 2 0 0 0-.167.069a2.5 2.5 0 0 0-.38.212c-.227.155-.75.581-.661 1.285c.07.56.454.905.689 1.071c.128.091.25.156.34.199c.04.02.126.054.163.07l.01.003zm14.138-9.152h-.002l-.026.011l-16.734 6.565l-.026.01l-.01.003a1 1 0 0 0-.09.04a1 1 0 0 0 .086.043l3.142 1.058a1 1 0 0 1 .16.076l10.377-6.075l.01-.005a2 2 0 0 1 .124-.068c.072-.037.187-.091.317-.131c.09-.028.357-.107.645-.014a.85.85 0 0 1 .588.689a.84.84 0 0 1 .003.424c-.07.275-.262.489-.437.653c-.15.14-2.096 2.016-4.015 3.868l-2.613 2.52l-.465.45l5.872 4.502a.54.54 0 0 0 .251.04a.23.23 0 0 0 .117-.052a.5.5 0 0 0 .103-.12l.002-.001l2.89-14.573a2 2 0 0 0-.267.086zm-8.461 12.394l-1.172-.898l-.284 1.805zm-2.247-2.68l1.165-1.125l2.613-2.522l.973-.938l-6.52 3.817l.035.082a339 339 0 0 1 1.22 2.92l.283-1.8a.75.75 0 0 1 .231-.435"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="contacts__social-text"
+                  >TG:&nbsp;@Natalia&nbsp;Mazina</span
+                >
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

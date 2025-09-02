@@ -242,9 +242,54 @@ const sizes  = "(max-width: 768px) 100vw, 1200px";
   }
 }
 
+/* ================
+   MODAL: from Sanity
+   ================ */
+async function initModalFromSanity() {
+  const imgDesktop = document.querySelector('[data-sanity-modal-img="desktop"]');
+  const imgMobile  = document.querySelector('[data-sanity-modal-img="mobile"]');
+  const titleEl    = document.querySelector('[data-sanity-modal-title]');
+  const textEl     = document.querySelector('[data-sanity-modal-text]');
+  if (!imgDesktop && !imgMobile && !titleEl && !textEl) return;
+
+  // один документ настроек
+  const GROQ = `*[_type=="settings"][0]{
+    "desktop": modalImage.asset->url,
+    "mobile":  modalImageMobile.asset->url,
+    modalAlt,
+    modalTitle,
+    modalText
+  }`;
+
+  try {
+    const data = await fetchGroq(GROQ);
+    if (!data) return;
+
+    const applyImg = (el, url) => {
+      if (!el || !url) return;
+      // используем твои хелперы для качества/ретины
+      const base   = withParams(url, { w: 1200, q: 90, auto: 'format' });
+      const srcset = buildSrcset(url, [600, 900, 1200, 1600, 2000]);
+      el.src    = base;
+      el.srcset = srcset;
+      el.sizes  = "(max-width: 768px) 100vw, 600px";
+      if (data.modalAlt) el.alt = data.modalAlt;
+    };
+
+    applyImg(imgDesktop, data.desktop);
+    applyImg(imgMobile,  data.mobile);
+
+    if (titleEl && data.modalTitle) titleEl.textContent = data.modalTitle;
+    if (textEl  && data.modalText)  textEl.textContent  = data.modalText;
+  } catch (e) {
+    console.error("Modal init failed:", e);
+  }
+}
+
 /* Entry */
 document.addEventListener("DOMContentLoaded", () => {
   initHero();
   initPortfolio();
   initAlbumPage();
+  initModalFromSanity();
 });
