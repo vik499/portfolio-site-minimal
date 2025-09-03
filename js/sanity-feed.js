@@ -8,8 +8,8 @@
  *  4) Make sure your dataset is public for read, and documents are published.
  */
 
-const PROJECT_ID  = "9zb8j7xw";   // ← твой projectId
-const DATASET     = "production";  // ← или твой dataset
+const PROJECT_ID  = "9zb8j7xw";
+const DATASET     = "production";
 const API_VERSION = "2025-08-27";
 
 const API_BASE = `https://${PROJECT_ID}.apicdn.sanity.io/v${API_VERSION}/data/query/${DATASET}`;
@@ -32,13 +32,10 @@ function withParams(rawUrl, params = {}) {
   return u.toString();
 }
 
-/** Build a responsive srcset string (широкий ряд ширин для ретины/4К) */
+/** Build a responsive srcset string */
 function buildSrcset(rawUrl, widths = [800, 1200, 1600, 2000, 2400, 3000, 3600]) {
-  return widths
-    .map((w) => `${withParams(rawUrl, { w })} ${w}w`)
-    .join(", ");
+  return widths.map((w) => `${withParams(rawUrl, { w })} ${w}w`).join(", ");
 }
-
 
 /** Legacy helper kept for internal use (single size) */
 function imgUrl(rawUrl, { w = 1200, fit = "max", auto = "format" } = {}) {
@@ -58,6 +55,42 @@ async function fetchGroq(groq) {
   return json.result;
 }
 
+/* ===========================
+   Глобальный полноэкранный лоадер
+   =========================== */
+let __loaderCount = 0;
+
+function ensureOverlay() {
+  if (document.querySelector(".loader-overlay")) return;
+  const overlay = document.createElement("div");
+  overlay.className = "loader-overlay";
+  overlay.innerHTML = `
+    <div class="loader" role="status" aria-live="polite" aria-label="Загрузка">
+      <span class="loader__circle"></span>
+    </div>`;
+  document.body.appendChild(overlay);
+}
+function removeOverlay() {
+  const overlay = document.querySelector(".loader-overlay");
+  if (overlay) overlay.remove();
+}
+function beginLoad() {
+  __loaderCount += 1;
+  if (__loaderCount === 1) ensureOverlay();
+}
+function endLoad() {
+  if (__loaderCount > 0) __loaderCount -= 1;
+  if (__loaderCount === 0) removeOverlay();
+}
+async function fetchGroqTracked(groq) {
+  beginLoad();
+  try {
+    return await fetchGroq(groq);
+  } finally {
+    endLoad();
+  }
+}
+
 /** Render helpers */
 function el(html) {
   const t = document.createElement("template");
@@ -72,7 +105,6 @@ async function initHero() {
   const wrapper = document.querySelector(".swiper .swiper-wrapper");
   if (!wrapper) return;
 
-  // Expect a singleton document "home" with slides[]
   const GROQ = `*[_type=="home"][0]{
     slides[]{
       "src": image.asset->url,
@@ -82,52 +114,67 @@ async function initHero() {
   }`;
 
   try {
-    const home = await fetchGroq(GROQ);
-    if (!home || !home.slides || !home.slides.length) return;
+    const home = await fetchGroqTracked(GROQ);
+    if (!home?.slides?.length) return;
 
-    // Clear static slides
+    // 1) чистим статические слайды
     wrapper.innerHTML = "";
 
+    // 2) считаем размеры под текущий экран (× DPR)
+    const dpr   = Math.min(window.devicePixelRatio || 1, 3);
+    const needW = Math.ceil(window.innerWidth  * dpr);
+    const needH = Math.ceil(window.innerHeight * dpr);
+
+    // 3) ВАЖНО: задаём ТОЛЬКО ОДНУ сторону — по доминирующему измерению
+    //    (портрет — высота, ландшафт — ширина). fit:max сохранит пропорции.
+    const common = { q: 90, fit: "max", auto: "format" };
+    const heroParams =
+      needH >= needW
+        ? { ...common, h: needH }  // портрет: важна высота
+        : { ...common, w: needW }; // ландшафт: важна ширина
+
+    // 4) рендерим слайды без srcset (чтобы браузер не брал мелкие версии)
     for (const s of home.slides) {
-     const src    = withParams(s.src, { w: 1600 }); // базовый фолбэк
-const srcset = buildSrcset(s.src, [800, 1200, 1600, 2000, 2400, 3000, 3600]);
-const sizes  = "100vw"; // слайд тянется на всю ширину экрана
+      const src = withParams(s.src, heroParams);
 
-const slide = el(`
-  <div class="swiper-slide">
-    <img
-      src="${src}"
-      srcset="${srcset}"
-      sizes="${sizes}"
-      alt="${s.alt || ""}"
-      loading="lazy"
-    >
-    ${s.caption ? `<div class="slide-caption">${s.caption}</div>` : ""}
-  </div>
-`);
-
+      const slide = el(`
+        <div class="swiper-slide">
+          <img
+            src="${src}"
+            alt="${s.alt || ""}"
+            fetchpriority="high"
+            decoding="async"
+          >
+          ${s.caption ? `<div class="slide-caption">${s.caption}</div>` : ""}
+        </div>
+      `);
       wrapper.appendChild(slide);
     }
 
-    // If Swiper already initialized elsewhere, attempt an update
-    if (window && window.swiper) {
-      try { window.swiper.update(); } catch {}
+    const slidesCount = wrapper.querySelectorAll(".swiper-slide").length;
+
+    // 5) уничтожаем старый инстанс, если был
+    if (window.swiper && typeof window.swiper.destroy === "function") {
+      try { window.swiper.destroy(true, true); } catch {}
+      window.swiper = null;
     }
-    // Otherwise, try to initialize if available and not already initialized
-    if (window && window.Swiper && !document.querySelector(".swiper.swiper-initialized")) {
-      try {
-        window.swiper = new Swiper(".swiper", {
-          loop: true,
-          speed: 500,
-          autoplay: { delay: 3000, disableOnInteraction: false },
-          effect: "slide",
-        });
-      } catch {}
+
+    // 6) инициализируем только если есть слайды
+    if (slidesCount > 0 && window.Swiper) {
+      window.swiper = new Swiper(".swiper", {
+        loop: slidesCount > 1,
+        speed: 500,
+        autoplay: slidesCount > 1 ? { delay: 3000, disableOnInteraction: false } : false,
+        effect: "slide",
+        observer: true,
+        observeParents: true,
+      });
     }
   } catch (e) {
     console.error("Hero init failed:", e);
   }
 }
+
 
 /* =========================
    2) PORTFOLIO: Albums list
@@ -144,16 +191,15 @@ async function initPortfolio() {
   }`;
 
   try {
-    const items = await fetchGroq(GROQ);
-    if (!items || !items.length) return;
+    const items = await fetchGroqTracked(GROQ);
+    if (!items?.length) return;
     container.innerHTML = "";
 
     for (const a of items) {
       const href   = `album.html?slug=${encodeURIComponent(a.slug)}`;
-const cover  = withParams(a.cover, { w: 1200 });
-const srcset = buildSrcset(a.cover, [400, 800, 1200, 1600, 2000]);
-const sizes  = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw";
-
+      const cover  = withParams(a.cover, { w: 1400, q: 90, fit: "max" });
+      const srcset = buildSrcset(a.cover, [600, 900, 1200, 1600, 2000]);
+      const sizes  = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw";
 
       const card = el(`
         <div class="portfolio-item__container-item">
@@ -186,32 +232,13 @@ async function initAlbumPage() {
   if (!grid) return;
 
   const titleEl = document.getElementById("album-title");
-  const params = new URLSearchParams(location.search);
-  const slug = params.get("slug");
-
-function showLoader() {
-  if (document.querySelector('.loader-overlay')) return; // не дублируем
-  const overlay = document.createElement('div');
-  overlay.className = 'loader-overlay';
-  overlay.innerHTML = `
-    <div class="loader" role="status" aria-live="polite" aria-label="Загрузка">
-      <span class="loader__circle"></span>
-    </div>`;
-  document.body.appendChild(overlay);
-}
-
-function hideLoader() {
-  const overlay = document.querySelector('.loader-overlay');
-  if (overlay) overlay.remove();
-}
+  const params  = new URLSearchParams(location.search);
+  const slug    = params.get("slug");
 
   if (!slug) {
     grid.innerHTML = "<p>Не указан slug альбома (?slug=...)</p>";
     return;
   }
-
-  // ⬇️ показываем спиннер до fetch
-  showLoader();
 
   const GROQ = `*[_type=="album" && slug.current==$slug][0]{
     title,
@@ -223,11 +250,8 @@ function hideLoader() {
 
   try {
     const safeSlug = slug.replace(/'/g, "\\'");
-    const query = GROQ.replace("$slug", `'${safeSlug}'`);
-    const album = await fetchGroq(query);
-
-    // ⬇️ убираем спиннер, готовим сетку
-    hideLoader();
+    const query    = GROQ.replace("$slug", `'${safeSlug}'`);
+    const album    = await fetchGroqTracked(query);
 
     if (album?.title) {
       if (titleEl) titleEl.textContent = album.title;
@@ -239,10 +263,11 @@ function hideLoader() {
       return;
     }
 
-    // отрисовка картинок
+    // рендер фотографий
+    grid.innerHTML = "";
     for (const ph of album.gallery) {
-      const src    = withParams(ph.src, { w: 1200, auto: "format" });
-      const srcset = buildSrcset(ph.src, [800, 1600, 2400]);
+      const src    = withParams(ph.src, { w: 1600, q: 90, fit: "max" });
+      const srcset = buildSrcset(ph.src, [600, 900, 1200, 1600, 2400]);
       const sizes  = "(max-width: 768px) 100vw, 1200px";
 
       const item = el(`
@@ -260,40 +285,60 @@ function hideLoader() {
     }
   } catch (e) {
     console.error("Album init failed:", e);
-    // ⬇️ на ошибке тоже убираем «вечную» загрузку и показываем сообщение
-    hideLoader();
     grid.innerHTML = "<p style='color:#c33;text-align:center;padding:24px'>Ошибка загрузки альбома. Попробуйте обновить страницу.</p>";
   }
 }
 
-
 /* ================
-   MODAL: from Sanity
+   4) SETTINGS: modal + socials
    ================ */
-async function initModalFromSanity() {
+async function initSettingsFromSanity() {
   const imgDesktop = document.querySelector('[data-sanity-modal-img="desktop"]');
   const imgMobile  = document.querySelector('[data-sanity-modal-img="mobile"]');
   const titleEl    = document.querySelector('[data-sanity-modal-title]');
   const textEl     = document.querySelector('[data-sanity-modal-text]');
-  if (!imgDesktop && !imgMobile && !titleEl && !textEl) return;
 
-  // один документ настроек
   const GROQ = `*[_type=="settings"][0]{
     "desktop": modalImage.asset->url,
     "mobile":  modalImageMobile.asset->url,
     modalAlt,
     modalTitle,
-    modalText
+    modalText,
+    vkUrl,
+    instagramUrl,
+    telegramUrl
   }`;
 
   try {
-    const data = await fetchGroq(GROQ);
+    const data = await fetchGroqTracked(GROQ);
     if (!data) return;
 
+    // соцсети: подставим href, если заданы
+    const map = { VK: data.vkUrl, Instagram: data.instagramUrl, Telegram: data.telegramUrl };
+    for (const [label, url] of Object.entries(map)) {
+      document.querySelectorAll(`a[aria-label="${label}"]`).forEach((a) => {
+        if (url) {
+          a.href = url;
+          a.target = "_blank";
+          a.rel = "noopener noreferrer";
+          a.classList.remove("is-disabled");
+          a.removeAttribute("aria-disabled");
+          a.tabIndex = 0;
+        } else {
+          a.removeAttribute("href");
+          a.removeAttribute("target");
+          a.removeAttribute("rel");
+          a.classList.add("is-disabled");
+          a.setAttribute("aria-disabled", "true");
+          a.tabIndex = -1;
+        }
+      });
+    }
+
+    // изображения/тексты модалки — если элементы есть
     const applyImg = (el, url) => {
       if (!el || !url) return;
-      // используем твои хелперы для качества/ретины
-      const base   = withParams(url, { w: 1200, q: 90, auto: 'format' });
+      const base   = withParams(url, { w: 1200, q: 90, auto: "format" });
       const srcset = buildSrcset(url, [600, 900, 1200, 1600, 2000]);
       el.src    = base;
       el.srcset = srcset;
@@ -307,7 +352,7 @@ async function initModalFromSanity() {
     if (titleEl && data.modalTitle) titleEl.textContent = data.modalTitle;
     if (textEl  && data.modalText)  textEl.textContent  = data.modalText;
   } catch (e) {
-    console.error("Modal init failed:", e);
+    console.error("Settings init failed:", e);
   }
 }
 
@@ -316,5 +361,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initHero();
   initPortfolio();
   initAlbumPage();
-  initModalFromSanity();
+  initSettingsFromSanity();
 });

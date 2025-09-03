@@ -1,9 +1,2 @@
-const swiper = new Swiper('.swiper', {
-  loop: true,
-  speed: 500, // скорость анимации в мс (резкая смена)
-  autoplay: {
-    delay: 3000, // задержка между слайдами
-    disableOnInteraction: false,
-  },
-  effect: 'slide', // стандартный сдвиг
-});
+// Swiper инициализируется в js/sanity-feed.js после подгрузки слайдов из Sanity.
+// Этот файл оставлен пустым умышленно, чтобы не было двойной инициализации.
