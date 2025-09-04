@@ -258,10 +258,19 @@ async function initAlbumPage() {
       document.title = album.title;
     }
 
-    if (!album?.gallery?.length) {
-      grid.innerHTML = "<p style='opacity:.7;text-align:center;padding:24px'>В этом альбоме пока нет фото.</p>";
-      return;
-    }
+if (!album?.gallery?.length) {
+  // помечаем сетку как пустую и выводим сообщение
+  grid.classList.add('is-empty');
+  grid.innerHTML = `
+    <div class="empty-album" role="status" aria-live="polite">
+      В этом альбоме пока нет фото :(
+    </div>
+  `;
+  return;
+}
+
+// если фото есть — убираем маркер пустоты
+grid.classList.remove('is-empty');
 
     // рендер фотографий
     grid.innerHTML = "";

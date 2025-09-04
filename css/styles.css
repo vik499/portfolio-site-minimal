@@ -424,3 +424,26 @@ body {
   border-top-color: rgba(0,0,0,0.65);
   animation: nm-spin 0.8s linear infinite;
 }
+
+
+/* Пустое состояние альбома */
+.album-photos-grid.is-empty {
+  /* центрирование текста по вертикали/горизонтали */
+  display: grid;
+  place-items: center;
+
+  /* чтобы блок был заметно высоким (можно увеличить до 80–90vh) */
+  min-height: 70vh;
+
+  /* уберём сеточные колонки, если задано в базовых стилях */
+  grid-template-columns: none;
+  gap: 0;
+  padding: 24px;
+  text-align: center;
+}
+
+.album-photos-grid.is-empty .empty-album {
+  font-size: 16px;
+  line-height: 1.6;
+  opacity: .7;
+}
