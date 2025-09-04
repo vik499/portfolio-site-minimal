@@ -75,7 +75,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: var(--color-bg);
+    /* background-color: var(--color-bg); */
 }
 
 .header__block-right {
