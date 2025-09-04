@@ -87,6 +87,10 @@ body {
     margin-right: 150px;
 }
 
+.header__social-item {
+    cursor: pointer;
+}
+
 .nav__list {
     display: flex;
     gap: 50px;
@@ -304,7 +308,7 @@ body {
 
 /* PORTFOLIO-PAGE */
 .portfolio-title {
-    padding: 15px;
+    padding: 5px;
     font-family: 'Roboto-ExtraLight';
 }
 
