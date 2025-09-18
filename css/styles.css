@@ -301,7 +301,7 @@ body {
 
 /* PORTFOLIO-PAGE */
 .portfolio-title {
-    padding: 5px;
+    padding: 5px 15px;
     font-family: 'Exo 2-Light';
     font-weight: 200;
 }
@@ -439,4 +439,17 @@ body {
   font-size: 16px;
   line-height: 1.6;
   opacity: .7;
+}
+
+
+.header {
+    /* display: flex; */
+    /* justify-content: center; */
+    padding: 20px 15px;
+}
+
+.portfolio-header__link {
+    font-family: 'Exo 2-Light';
+    font-size: 24px;
+    font-weight: 200;
 }

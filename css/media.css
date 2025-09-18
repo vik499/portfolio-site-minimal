@@ -49,11 +49,11 @@
 
   .album-photos-grid {
     /* если у тебя masonry: */
-    column-count: 2;
+    column-count: 1;
 
     /* если у тебя grid: */
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
 
     /* общий отступ между карточками */
     gap: 10px;
@@ -111,6 +111,11 @@
         font-size: 20px;
         margin-bottom: 5px;
     }
+
+    .portfolio-title {
+        font-size: 24px;
+    }
+
 }
 
 @media (min-width: 1025px) {
