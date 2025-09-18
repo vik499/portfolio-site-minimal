@@ -450,6 +450,12 @@ body {
 
 .portfolio-header__link {
     font-family: 'Exo 2-Light';
-    font-size: 24px;
+    font-size: 36px;
+    font-weight: 200;
+}
+
+.album-header__link {
+    font-family: 'Exo 2-Light';
+    font-size: 36px;
     font-weight: 200;
 }

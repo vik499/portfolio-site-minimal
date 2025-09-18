@@ -116,6 +116,14 @@
         font-size: 24px;
     }
 
+    .portfolio-header__link {
+        font-size: 24px;
+    }
+
+    .album-header__link {
+        font-size: 24px;
+    }
+
 }
 
 @media (min-width: 1025px) {
