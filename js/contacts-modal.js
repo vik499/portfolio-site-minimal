@@ -1,21 +1,29 @@
+// contacts-modal.js
 document.addEventListener('DOMContentLoaded', () => {
   const openBtn = document.getElementById('openContactsBtn');
   const modal = document.getElementById('contactsModal');
   const closeBtn = document.getElementById('closeContactsBtn');
 
-  // Открыть модалку по клику на кнопку
+  // ✅ На экранах <= 1024px: полностью отключаем логику модалки и скрываем элементы
+  if (window.innerWidth <= 1024) {
+    if (openBtn) openBtn.style.display = 'none';
+    if (modal) modal.style.display = 'none';
+    return;
+  }
+
+  if (!openBtn || !modal || !closeBtn) return;
+
+  // Десктопное поведение:
   openBtn.addEventListener('click', () => {
     modal.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Запрет прокрутки фона
+    document.body.style.overflow = 'hidden';
   });
 
-  // Закрыть модалку по клику на крестик
   closeBtn.addEventListener('click', () => {
     modal.classList.remove('active');
-    document.body.style.overflow = ''; // Восстановить прокрутку
+    document.body.style.overflow = '';
   });
 
-  // Закрыть модалку, если кликнули вне содержимого (по фону)
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
       modal.classList.remove('active');
@@ -23,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Закрыть модалку по нажатию Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('active')) {
       modal.classList.remove('active');

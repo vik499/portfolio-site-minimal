@@ -42,6 +42,11 @@
   .page-home #hero { display: none; }
   .page-home #portfolio-grid { display: block; }
 
+    .contacts-button,
+  .contacts-modal {
+    display: none !important;
+  }
+
   /* Прячем ссылку "Portfolio" только на мобильной главной */
   .page-home .nav__link[href="portfolio.html"] {
     display: none !important;
@@ -123,6 +128,17 @@
     .album-header__link {
         font-size: 24px;
     }
+
+  /* Скрыть кнопку и модалку полностью */
+  #openContactsBtn,
+  #contactsModal {
+    display: none !important;
+  }
+
+  /* Показать иконки соцсетей в шапке */
+  .header__socials {
+    display: flex !important;
+  }
 
 }
 
