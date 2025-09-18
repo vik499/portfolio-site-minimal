@@ -1,3 +1,7 @@
+/* По умолчанию на ГЛАВНОЙ (desktop-first): слайдер виден, грид скрыт */
+.page-home #hero { display: block; }
+.page-home #portfolio-grid { display: none; }
+
 @media (max-width: 1920px) {
     .contacts__info {
         padding: 15px 15px 15px 50px;
@@ -35,6 +39,14 @@
 }
 
 @media (max-width: 1024px) {
+  .page-home #hero { display: none; }
+  .page-home #portfolio-grid { display: block; }
+
+  /* Прячем ссылку "Portfolio" только на мобильной главной */
+  .page-home .nav__link[href="portfolio.html"] {
+    display: none !important;
+  }
+
     .album-photos-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -91,6 +103,11 @@
         font-size: 20px;
         margin-bottom: 5px;
     }
+}
+
+@media (min-width: 1025px) {
+  .page-home #hero { display: block; }
+  .page-home #portfolio-grid { display: none; }
 }
 
 @media (max-width: 768px) {

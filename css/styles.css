@@ -28,6 +28,11 @@ h6 {
     src: url(../fonts/Exo2-Light.woff2);
 }
 
+@font-face {
+    font-family: 'Exo 2-Medium';
+    src: url(../fonts/Exo2-Medium.woff2);
+}
+
 body {
     background-color: #f4f4f4;
     font-family: 'Exo 2-ExtraLight', sans-serif;
@@ -310,7 +315,6 @@ body {
     box-sizing: border-box;
 }
 
-
 .portfolio-item__container-item {
     width: 100%;
     height: 100%;
@@ -341,30 +345,27 @@ body {
     height: 100%;
 }
 
-/* ===== Альбом: сетка фото ===== */
+/* ===== Альбом: Masonry без обрезки ===== */
 .album-photos-grid {
-    padding: 0 10px 0 10px;
-    display: grid;
-    gap: 10px;
-    /* расстояние между фото */
-    grid-template-columns: repeat(3, 1fr);
-    /* базово: 3 колонки на десктопе */
+    padding: 0 10px;
+    /* masonry на мульти-колонках вместо grid */
+    column-count: 3;         /* 3 колонки на десктопе */
+    column-gap: 10px;        /* расстояние между колонками */
 }
 
-/* карточка */
+/* карточка не должна ломаться между колонками */
 .album-photo {
-    margin: 0;
-    aspect-ratio: 4 / 3;
-    /* одинаковая высота превью */
-    overflow: hidden;
-    /* обрезаем лишнее */
+    margin: 0 0 10px;
+    break-inside: avoid;
+    /* УДАЛЕНО: aspect-ratio: 4 / 3; */
+    /* УДАЛЕНО: overflow: hidden; */
 }
 
+/* изображение показываем целиком, без обрезки */
 .album-photo img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* вписываем фото в рамку */
+    height: auto;            /* было 100% */
+    object-fit: contain;     /* было cover */
     display: block;
 }
 
@@ -417,7 +418,6 @@ body {
   border-top-color: rgba(0,0,0,0.65);
   animation: nm-spin 0.8s linear infinite;
 }
-
 
 /* Пустое состояние альбома */
 .album-photos-grid.is-empty {
