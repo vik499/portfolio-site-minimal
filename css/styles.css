@@ -349,7 +349,7 @@ body {
 .album-photos-grid {
     padding: 0 10px;
     /* masonry на мульти-колонках вместо grid */
-    column-count: 3;         /* 3 колонки на десктопе */
+    column-count: 3;        /* 3 колонки на десктопе */
     column-gap: 10px;        /* расстояние между колонками */
 }
 

@@ -47,9 +47,17 @@
     display: none !important;
   }
 
-    .album-photos-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .album-photos-grid {
+    /* если у тебя masonry: */
+    column-count: 2;
+
+    /* если у тебя grid: */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    /* общий отступ между карточками */
+    gap: 10px;
+  }
 
     .header__nav {
         margin-right: 50px;
@@ -111,9 +119,25 @@
 }
 
 @media (max-width: 768px) {
-    .album-photos-grid {
-        grid-template-columns: repeat(1, 1fr);
-    }
+  .album-photos-grid {
+    /* вариант masonry: */
+    column-count: 1;
+
+    /* вариант grid: */
+    display: grid;
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+  }
+
+  /* на мобильном карточка растягивается по ширине, фото без обрезки */
+  .album-photo { margin: 0; }
+  .album-photo img {
+    width: 100%;
+    height: auto;
+    object-fit: contain; /* чтобы не резало кадр */
+    display: block;
+  }
 
     .nav__list {
         gap: 10px;
