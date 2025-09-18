@@ -14,11 +14,11 @@
 
 @media (max-width: 1440px) {
     .album-photos-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .portfolio-grid__container {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .contacts__container {
@@ -54,11 +54,11 @@
 
   .album-photos-grid {
     /* если у тебя masonry: */
-    column-count: 1;
+    column-count: 3;
 
     /* если у тебя grid: */
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 
     /* общий отступ между карточками */
     gap: 10px;
@@ -152,13 +152,21 @@
 }
 
 @media (max-width: 768px) {
-  .album-photos-grid {
-    /* вариант masonry: */
-    column-count: 1;
+        .album-photos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
-    /* вариант grid: */
+    .portfolio-grid__container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+  .album-photos-grid {
+    /* column-count: 2;
+
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr); */
+
+    
 
     gap: 10px;
   }
@@ -209,7 +217,7 @@
 
     .portfolio-grid__container {
         /* display: grid; */
-        grid-template-columns: repeat(1, 1fr);
+        /* grid-template-columns: repeat(1, 1fr); */
         /* gap: 10px;
     padding: 5px; */
 
@@ -218,6 +226,10 @@
 }
 
 @media (max-width: 690px) {
+    .portfolio-title {
+        font-size: 20px;
+    }
+
     .album-photos-grid {
         grid-template-columns: 1fr;
     }
@@ -282,6 +294,11 @@
 }
 
 @media (max-width: 459px) {
+    .portfolio-title {
+        padding: 5px 5px;
+        font-size: 16px;
+    }
+
     .album-photos-grid {
         grid-template-columns: 1fr;
     }
@@ -311,4 +328,10 @@
     .contacts__info {
         padding: 15px 15px 20px 15px;
     }
+}
+
+@media (max-width: 360px) {
+.header__title {
+    font-size: 22px;
+}
 }
