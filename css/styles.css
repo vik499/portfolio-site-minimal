@@ -466,3 +466,8 @@ body {
     font-size: 36px;
     font-weight: 200;
 }
+
+.album-header__link:hover {
+       color: #bdbcbe;
+    transition: ease-in-out 0.2s;
+}
