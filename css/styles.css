@@ -33,6 +33,11 @@ h6 {
     src: url(../fonts/Exo2-Medium.woff2);
 }
 
+@font-face {
+    font-family: 'Exo 2-Medium';
+    src: url(../fonts/Exo2-Medium.woff2);
+}
+
 body {
     background-color: #f4f4f4;
     font-family: 'Exo 2-ExtraLight', sans-serif;
@@ -303,8 +308,8 @@ body {
 /* PORTFOLIO-PAGE */
 .portfolio-title {
     padding: 5px 15px;
-    font-family: 'Exo 2-Light';
-    font-weight: 200;
+    font-family: 'Exo 2-Medium';
+    /* font-weight: 800; */
 }
 
 .portfolio-grid__container {
