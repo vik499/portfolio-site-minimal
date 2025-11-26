@@ -227,7 +227,7 @@
 
 @media (max-width: 690px) {
     .portfolio-title {
-        font-size: 20px;
+        font-size: 17px;
     }
 
     .album-photos-grid {
@@ -296,7 +296,7 @@
 @media (max-width: 459px) {
     .portfolio-title {
         padding: 5px 5px;
-        font-size: 16px;
+        font-size: 12px;
     }
 
     .album-photos-grid {
