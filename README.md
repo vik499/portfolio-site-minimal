@@ -1,4 +1,4 @@
-# Portfolio site — Natalia Mazina
+# Portfolio site — Photographer Natalia Mazina
 
 Статический сайт-портфолио фотографа.  
 Сайт получает контент (альбомы, фото, модальное окно, соц.сети) из **Sanity CMS** и отображает его на страницах.  
